@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      # shortcut: no-op until the monorepo scaffold lands (M0 import); then replace with `just lint test`.
+      - name: Detect workspace
+        id: ws
+        run: echo "present=$([ -f package.json ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+      - if: steps.ws.outputs.present == 'true'
+        uses: pnpm/action-setup@v4
+      - if: steps.ws.outputs.present == 'true'
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+      - if: steps.ws.outputs.present == 'true'
+        run: pnpm install --frozen-lockfile
+      - if: steps.ws.outputs.present == 'true'
+        run: pnpm -r --if-present lint && pnpm -r --if-present typecheck && pnpm -r --if-present test
+      - if: steps.ws.outputs.present != 'true'
+        run: echo "No package.json yet; nothing to check."

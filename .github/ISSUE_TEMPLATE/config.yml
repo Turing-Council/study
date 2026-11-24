@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Copyright / takedown request
+    url: https://github.com/Turing-Council/study/security/advisories/new
+    about: Material that shouldn't be on the platform? Report it privately (mark it "Takedown"). Don't open a public issue.
+  - name: Plan & decisions
+    url: https://github.com/Turing-Council/study/tree/main/docs
+    about: Check the plan (docs/plan) and ADRs (docs/decisions) before opening an issue.

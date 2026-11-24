@@ -1,0 +1,38 @@
+name: Bug
+description: Report something that doesn't work
+labels: ["type:bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is public. **Don't paste personal data, other people's notes, or exam files.** Security problems and takedown requests go through [SECURITY.md](https://github.com/Turing-Council/study/blob/main/SECURITY.md) instead.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - web
+        - api
+        - shared
+        - exams
+        - notes
+        - ideas
+        - courses
+        - auth
+        - infra
+        - docs
+        - content
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to Reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs Actual Behaviour
+    validations:
+      required: true

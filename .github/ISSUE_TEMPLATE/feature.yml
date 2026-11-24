@@ -1,0 +1,45 @@
+name: Feature / Task
+description: Implement a requirement or milestone task from docs/plan/
+labels: ["type:feature"]
+body:
+  - type: input
+    id: req_ids
+    attributes:
+      label: Requirement IDs
+      description: Comma-separated IDs from docs/plan/01-requirements.md (if applicable)
+      placeholder: "EXM-04, NOTE-02"
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - web
+        - api
+        - shared
+        - exams
+        - notes
+        - ideas
+        - courses
+        - auth
+        - infra
+        - docs
+        - content
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What are we building and why?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Concrete exit conditions (tests, metrics, behaviours)
+      value: |
+        - [ ] Unit/integration tests added
+        - [ ] Docs or shared contracts updated if applicable
+    validations:
+      required: true

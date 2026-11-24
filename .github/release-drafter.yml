@@ -1,0 +1,35 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+categories:
+  - title: 'Features'
+    labels: ['type:feature']
+  - title: 'Bug Fixes & Regressions'
+    labels: ['type:bug', 'type:regression']
+  - title: 'Maintenance & CI'
+    labels: ['type:chore', 'dependencies']
+template: |
+  ## Changes
+
+  $CHANGES
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+autolabeler:
+  - label: 'type:feature'
+    title:
+      - '/^feat(\(.+\))?(!)?:/'
+  - label: 'type:bug'
+    title:
+      - '/^fix(\(.+\))?(!)?:/'
+  - label: 'type:chore'
+    title:
+      - '/^(chore|ci|build|docs|refactor|perf|test|revert)(\(.+\))?(!)?:/'
+  - label: 'breaking'
+    title:
+      - '/^.+!:/'
+version-resolver:
+  major:
+    labels: ['breaking']
+  minor:
+    labels: ['type:feature']
+  patch:
+    labels: ['type:bug', 'type:regression', 'type:chore']
+  default: patch
